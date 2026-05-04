@@ -76,14 +76,14 @@ public class SleepTrackerAppTest {
     void averageDuration_Sessions() {
         AverageDurationFunction function = new AverageDurationFunction();
         SleepAnalysisResult<?> result = function.apply(sessions);
-        assertEquals("775,00", result.getValue());
+        assertEquals("775.00", result.getValue());
     }
 
     @Test
     void averageDuration_Sessions_EmptyList() {
         AverageDurationFunction function = new AverageDurationFunction();
         SleepAnalysisResult<?> result = function.apply(emptySessions);
-        assertEquals("0,00", result.getValue());
+        assertEquals("0.00", result.getValue());
     }
 
     @Test
