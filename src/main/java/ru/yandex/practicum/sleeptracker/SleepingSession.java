@@ -24,13 +24,4 @@ public class SleepingSession {
     public Quality getQuality() {
         return quality;
     }
-
-    @Override
-    public String toString() {
-        return "SleepingSession{" + "startDateTime=" + startDateTime.format(SleepTrackerApp.DATE_TIME_FORMATTER) + ", endDateTime=" + endDateTime.format(SleepTrackerApp.DATE_TIME_FORMATTER) + ", quality=" + quality + '}';
-    }
-}
-
-enum Quality {
-    GOOD, NORMAL, BAD
 }
