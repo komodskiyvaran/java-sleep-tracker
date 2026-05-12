@@ -114,13 +114,20 @@ public class ChronotypeFunction implements Function<List<SleepingSession>, Sleep
             return "голубь";
         }
 
-        LocalTime sleepTime = coveringSession.getStartDateTime().toLocalTime();
-        LocalTime wakeTime = coveringSession.getEndDateTime().toLocalTime();
+        LocalDateTime sleepTime = coveringSession.getStartDateTime();
+        LocalDateTime wakeTime = coveringSession.getEndDateTime();
 
-        if (sleepTime.isAfter(LocalTime.of(23, 0)) && wakeTime.isAfter(LocalTime.of(9, 0))) {
+        if (sleepTime.toLocalTime().isBefore(LocalTime.NOON)) {
+            sleepTime = sleepTime.minusDays(1);
+        }
+
+        LocalTime sleep = sleepTime.toLocalTime();
+        LocalTime wake = wakeTime.toLocalTime();
+
+        if (sleep.isAfter(LocalTime.of(23, 0)) && wake.isAfter(LocalTime.of(9, 0))) {
             return "сова";
         }
-        if (sleepTime.isBefore(LocalTime.of(22, 0)) && wakeTime.isBefore(LocalTime.of(7, 0))) {
+        if (sleep.isBefore(LocalTime.of(22, 0)) && wake.isBefore(LocalTime.of(7, 0))) {
             return "жаворонок";
         }
         return "голубь";

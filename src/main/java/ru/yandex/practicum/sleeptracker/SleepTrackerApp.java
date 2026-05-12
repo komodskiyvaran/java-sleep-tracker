@@ -22,7 +22,9 @@ public class SleepTrackerApp {
                 new CountBadSessionFunction(),
                 new SleeplessNightsFunction(),
                 new ChronotypeFunction());
-        printFunction(functions, listSession);
+        functions.stream()
+                .map(f -> f.apply(listSession))
+                .forEach(result -> System.out.println(result.getDescription() + ": " + result.getValue()));
 
     }
 
@@ -34,11 +36,5 @@ public class SleepTrackerApp {
                         LocalDateTime.parse(parts[1], DATE_TIME_FORMATTER),
                         Quality.valueOf(parts[2])))
                 .toList();
-    }
-
-    private static void printFunction(List<Function<List<SleepingSession>, SleepAnalysisResult<?>>> functions, List<SleepingSession> listSession) {
-        functions.stream()
-                .map(function -> function.apply(listSession))
-                .forEach(result -> System.out.println(result.getDescription() + ": " + result.getValue()));
     }
 }

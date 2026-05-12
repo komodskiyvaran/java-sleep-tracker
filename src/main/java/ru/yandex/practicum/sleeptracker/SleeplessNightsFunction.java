@@ -26,11 +26,7 @@ public class SleeplessNightsFunction implements Function<List<SleepingSession>, 
                 .get();
 
         LocalDate firstNight = firstStart.toLocalDate();
-        if (firstStart.toLocalTime().isBefore(LocalTime.NOON)) {
-            firstNight = firstNight.minusDays(1);
-        } else {
-            firstNight = firstNight.plusDays(1);
-        }
+        firstNight = firstStart.toLocalTime().isAfter(LocalTime.NOON) ? firstNight.plusDays(1) : firstNight;
 
         LocalDate lastNight = lastEnd.toLocalDate();
         if (lastEnd.toLocalTime().isBefore(LocalTime.of(6, 0))) {
